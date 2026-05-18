@@ -30,44 +30,47 @@ When auto-login triggers:
 
 ## Commands
 
-### Search Official Accounts
+### 搜索公众号
 
 ```bash
 cd "${CLAUDE_SKILL_DIR}/scripts" && python __main__.py search "ACCOUNT_NAME" --limit 10
 ```
 
-Returns `fakeid`, `nickname`, `alias`. `fakeid` is needed for listing articles.
+按名称搜索公众号，返回 fakeid、名称、别名。fakeid 用于获取文章列表。
 
 **When `search` returns multiple accounts, use `AskUserQuestion` to let the user pick which account to use.** Present each account as an option with `nickname` (and `alias` if available) as the label, and `fakeid` as the value. Then use the selected `fakeid` for the subsequent `list` command.
 
-### Get Article List
+### 获取文章列表
 
 ```bash
 cd "${CLAUDE_SKILL_DIR}/scripts" && python __main__.py list "FAKEID" --name "ACCOUNT_NAME" --pages 2
 ```
 
-Each page = ~5 articles. Returns `title`, `link`, `cover`, `digest`, timestamps.
+分页获取公众号历史文章，每页约5篇。返回标题、链接、封面、摘要、时间戳。
 
-### Fetch Full Article Content
+### 获取文章全文
 
 ```bash
 cd "${CLAUDE_SKILL_DIR}/scripts" && python __main__.py fetch "https://mp.weixin.qq.com/s/ARTICLE_ID"
 ```
 
-Returns `title`, `author`, `description`, `content` (HTML), `publish_time`, `mp_info`.
-Does NOT need a token — opens article URL directly in browser.
+提取文章完整内容，返回标题、作者、描述、正文(HTML)、发布时间、公众号信息。无需 token，直接打开文章 URL。
 
-### Manual Login
+### 手动登录
 
 ```bash
 cd "${CLAUDE_SKILL_DIR}/scripts" && python __main__.py login
 ```
 
-### Check Token
+手动触发扫码登录，用于 token 失效时重新获取。
+
+### 检查 Token
 
 ```bash
 cd "${CLAUDE_SKILL_DIR}/scripts" && python __main__.py check-token
 ```
+
+检查当前 token 是否有效，过期时需重新登录。
 
 ## Error Handling
 

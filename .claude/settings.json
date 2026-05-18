@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import json,sys; d=json.load(sys.stdin); p=d.get('tool_response',{}).get('filePath',d.get('tool_input',{}).get('file_path','')); print(p)\" 2>/dev/null | { read -r f; echo \"$f\" | grep -q '\\.claude/skills/' && bash D:/Projects/Mason_Skills/.claude/hooks/sync-readme.sh && bash D:/Projects/Mason_Skills/.claude/hooks/sync-global-settings.sh || true; }",
+            "timeout": 30,
+            "statusMessage": "Syncing skills..."
+          }
+        ]
+      }
+    ]
+  }
+}
