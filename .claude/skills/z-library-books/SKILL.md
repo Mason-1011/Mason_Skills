@@ -13,20 +13,19 @@ Search and download books from Z-Library using browser automation to bypass anti
 - Playwright: `pip install playwright && python3 -m playwright install chromium`
 - Network proxy: set `HTTPS_PROXY` and `HTTP_PROXY` environment variables
 
-## Script Location
+## Scripts
 
-The scripts are in the project's `src/` directory (relative to this SKILL.md):
+All scripts are in this skill's `scripts/` directory:
 
 ```
-<project_root>/src/browser_client.py   # Playwright-based client
-<project_root>/src/browser_search.py   # CLI tool
+<script_dir>/browser_client.py   # Playwright-based client
+<script_dir>/browser_search.py   # CLI tool
 ```
 
 Define a variable for convenience:
 
 ```bash
-SKILL_DIR="<path_to_this_skill_directory>"
-SCRIPT="$SKILL_DIR/../../src/browser_search.py"
+SCRIPT_DIR="<this_skill_dir>/scripts"
 ```
 
 ## Commands
@@ -34,19 +33,19 @@ SCRIPT="$SKILL_DIR/../../src/browser_search.py"
 ### Login
 
 ```bash
-HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT" login --email "user@email.com" --password "password"
+HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser_search.py" login --email "user@email.com" --password "password"
 ```
 
 ### Check auth status
 
 ```bash
-python3 "$SCRIPT" status
+python3 "$SCRIPT_DIR/browser_search.py" status
 ```
 
 ### Search books
 
 ```bash
-HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT" search "book title" --limit 10
+HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser_search.py" search "book title" --limit 10
 ```
 
 Options: `--json` (JSON output), `--ids` (show book IDs)
@@ -54,13 +53,13 @@ Options: `--json` (JSON output), `--ids` (show book IDs)
 ### Download a book
 
 ```bash
-HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT" download <id> <hash> -o ./downloads
+HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser_search.py" download <id> <hash> -o ./downloads
 ```
 
 ### Logout
 
 ```bash
-python3 "$SCRIPT" logout
+python3 "$SCRIPT_DIR/browser_search.py" logout
 ```
 
 ## Workflow
