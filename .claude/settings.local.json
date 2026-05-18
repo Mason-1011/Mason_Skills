@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git ls-tree *)",
+      "Bash(python -c \"from scripts.wechat_article import token; print\\('token module OK'\\)\")",
+      "Bash(python -m wechat_article --help)",
+      "Bash(python -m wechat_article check-token)",
+      "Bash(mv scripts/wechat_article .)",
+      "Bash(rmdir scripts *)",
+      "Bash(python -c ' *)",
+      "Bash(python -m wechat_article login --help)",
+      "Bash(python -m wechat_article fetch \"https://mp.weixin.qq.com/s/93VMIcvAt4LT5n8vyZ0BYA?scene=1&click_id=12\")",
+      "Bash(python -m playwright install firefox)",
+      "Bash(pip install *)",
+      "Bash(C:/Users/Mason/AppData/Roaming/Python/Python313/Scripts/wechat-article.exe check-token *)",
+      "WebSearch",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(mkdir -p \"D:/Projects/Mason_Skills/.claude/skills/wechat-article/scripts\")",
+      "Bash(mkdir -p \"D:/Projects/Mason_Skills/.claude/skills/wechat-article/data\")",
+      "Bash(python -c \"import sys; sys.path.insert\\(0, '.'\\); import token; print\\('token.py OK:', token._get_token_path\\(\\)\\)\")",
+      "Bash(python __main__.py check-token)",
+      "Bash(python __main__.py search \"人民日报\" --limit 3)",
+      "Bash(python __main__.py login)",
+      "Bash(python __main__.py login --headed)",
+      "Bash(python __main__.py list \"MjM5MjAxNDM4MA==\" --name \"人民日报\" --pages 1)",
+      "Bash(python __main__.py fetch \"https://mp.weixin.qq.com/s/yiXyMjvySa2vcYx4yzRUcw\")",
+      "Bash(python __main__.py search \"科技\" --limit 5)",
+      "Bash(python __main__.py list \"MzUyMTc0MzMyMw==\" --name \"极速科技GSM\" --pages 1)",
+      "Bash(python __main__.py fetch \"https://mp.weixin.qq.com/s/6DAUecfMMiqH2iTQLnN2XA\")",
+      "Bash(git add *)"
+    ]
+  }
+}
