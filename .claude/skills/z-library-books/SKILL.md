@@ -62,6 +62,34 @@ HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser
 python3 "$SCRIPT_DIR/browser_search.py" logout
 ```
 
+### Find working domain
+
+Scan known Z-Library mirror domains and find which ones are accessible:
+
+```bash
+HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser_search.py" find-domain
+```
+
+Options: `--timeout` (seconds per domain, default 10)
+
+### Check site access
+
+Test if the current Z-Library domain is reachable:
+
+```bash
+HTTPS_PROXY="$HTTPS_PROXY" HTTP_PROXY="$HTTP_PROXY" python3 "$SCRIPT_DIR/browser_search.py" check-access
+```
+
+Options: `--domain` (override domain), `--timeout` (seconds, default 10)
+
+### Check environment credentials
+
+Verify that `ZLIBRARY_EMAIL` and `ZLIBRARY_PASSWORD` are set:
+
+```bash
+python3 "$SCRIPT_DIR/browser_search.py" check-env
+```
+
 ## Workflow
 
 1. Run `status` to check auth.

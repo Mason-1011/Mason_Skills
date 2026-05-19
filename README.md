@@ -23,3 +23,16 @@
 5. 检查 Token — 检查当前 token 是否有效，过期时需重新登录。
 
 **完整文档：** `.claude/skills/wechat-article/SKILL.md`
+
+### z-library-books
+
+1. Login
+2. Check auth status
+3. Search books — Options: --json (JSON output), --ids (show book IDs)
+4. Download a book
+5. Logout
+6. Find working domain — Scan known Z-Library mirror domains and find which ones are accessible:
+7. Check site access — Test if the current Z-Library domain is reachable:
+8. Check environment credentials — Verify that ZLIBRARY_EMAIL and ZLIBRARY_PASSWORD are set:
+
+**完整文档：** `.claude/skills/z-library-books/SKILL.md`

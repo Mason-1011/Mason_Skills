@@ -3,7 +3,7 @@
 # Extracts ### headers + first description line as "name - description"
 set -e
 
-PROJECT_ROOT="D:/Projects/Mason_Skills"
+PROJECT_ROOT="/Users/mason_yu/Projects/Mason_Skills"
 SKILLS_DIR="$PROJECT_ROOT/.claude/skills"
 README="$PROJECT_ROOT/README.md"
 

@@ -2,7 +2,7 @@
 # Sync project skills to global Claude settings via symlinks in ~/.claude/skills/
 set -e
 
-PROJECT_ROOT="D:/Projects/Mason_Skills"
+PROJECT_ROOT="/Users/mason_yu/Projects/Mason_Skills"
 SKILLS_DIR="$PROJECT_ROOT/.claude/skills"
 GLOBAL_SKILLS="$HOME/.claude/skills"
 
@@ -28,8 +28,8 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     rm -rf "$target"
   fi
 
-  # Create symlink (use absolute Windows path for Git Bash)
-  ln -s "$(cygpath -u "$skill_dir" 2>/dev/null || echo "$skill_dir")" "$target"
+  # Create symlink
+  ln -s "$skill_dir" "$target"
 done
 
 echo '{"systemMessage":"Skills synced to global ~/.claude/skills/"}'

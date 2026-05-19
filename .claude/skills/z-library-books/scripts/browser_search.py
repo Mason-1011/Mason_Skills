@@ -11,7 +11,10 @@ from pathlib import Path
 
 from browser_client import (
     ZLibraryError,
+    check_env_credentials,
+    check_site_access,
     download_book,
+    find_working_domain,
     load_auth_browser,
     login_with_browser,
     logout_browser,
@@ -74,9 +77,98 @@ def cmd_status(args: argparse.Namespace) -> int:
 
         print("Authenticated to Z-Library.")
         print(f"remix_userid preview: {cookies['remix_userid'][:6]}...")
+
+        # Also show env credential status
+        env = check_env_credentials()
+        print()
+        print("Environment credentials:")
+        print(f"  ZLIBRARY_EMAIL:    {'set (' + env['email_preview'] + ')' if env['email_set'] else 'NOT SET'}")
+        print(f"  ZLIBRARY_PASSWORD: {'set' if env['password_set'] else 'NOT SET'}")
         return 0
     except ZLibraryError as e:
         print(str(e))
+        return 1
+
+
+def cmd_find_domain(args: argparse.Namespace) -> int:
+    """Find currently working Z-Library domain."""
+    print("Scanning known Z-Library domains...")
+    print(f"Timeout per domain: {args.timeout}s")
+    print()
+
+    results = find_working_domain(timeout=args.timeout)
+
+    print(f"{'Domain':<30} {'Status':<8} {'Latency':<10} {'Accessible'}")
+    print("-" * 65)
+    for r in results:
+        status = str(r["status_code"]) if r["status_code"] else "N/A"
+        latency = f"{r['latency_ms']}ms" if r["latency_ms"] else "N/A"
+        accessible = "YES" if r["accessible"] else "NO"
+        print(f"{r['domain']:<30} {status:<8} {latency:<10} {accessible}")
+
+    working = [r for r in results if r["accessible"]]
+    if working:
+        print()
+        print(f"Working domain found: {working[0]['domain']}")
+        print(f"To use it: export ZLIBRARY_API_BASE={working[0]['domain']}")
+        return 0
+    else:
+        print()
+        print("No accessible domains found. Check your network/proxy settings.")
+        return 1
+
+
+def cmd_check_access(args: argparse.Namespace) -> int:
+    """Check if the current Z-Library domain is accessible."""
+    domain = args.domain or os.getenv("ZLIBRARY_API_BASE", "https://z-library.im")
+    proxy = os.getenv("HTTPS_PROXY") or os.getenv("HTTP_PROXY")
+
+    print(f"Checking access to: {domain}")
+    print(f"Proxy: {proxy or '(none)'}")
+    print()
+
+    result = check_site_access(domain, timeout=args.timeout)
+
+    print(f"Domain:      {result['domain']}")
+    print(f"Accessible:  {'YES' if result['accessible'] else 'NO'}")
+    print(f"Status code: {result['status_code'] or 'N/A'}")
+    print(f"Latency:     {result['latency_ms']}ms" if result['latency_ms'] else "Latency:     N/A")
+    print(f"Proxy used:  {result['proxy_used']}")
+    if result["error"]:
+        print(f"Error:       {result['error']}")
+
+    if not result["accessible"]:
+        print()
+        print("Tip: Try running 'find-domain' to discover working mirrors.")
+        print("Tip: If behind a firewall, set HTTPS_PROXY and HTTP_PROXY env vars.")
+        return 1
+    return 0
+
+
+def cmd_check_env(args: argparse.Namespace) -> int:
+    """Check if Z-Library credentials are in environment variables."""
+    env = check_env_credentials()
+
+    print("Z-Library Environment Credentials Check")
+    print()
+    print(f"  ZLIBRARY_EMAIL:    {'SET (' + env['email_preview'] + ')' if env['email_set'] else 'NOT SET'}")
+    print(f"  ZLIBRARY_PASSWORD: {'SET' if env['password_set'] else 'NOT SET'}")
+    print(f"  Auth cache:        {'exists' if env['auth_cache_exists'] else 'not found'}")
+    print()
+
+    if env["email_set"] and env["password_set"]:
+        print("Credentials OK. You can use 'login' to authenticate.")
+        return 0
+    else:
+        missing = []
+        if not env["email_set"]:
+            missing.append("ZLIBRARY_EMAIL")
+        if not env["password_set"]:
+            missing.append("ZLIBRARY_PASSWORD")
+        print(f"Missing: {', '.join(missing)}")
+        print("Set them with:")
+        for m in missing:
+            print(f"  export {m}='your_value'")
         return 1
 
 
@@ -151,6 +243,21 @@ def main() -> int:
     # Logout command
     logout_parser = sub.add_parser("logout", help="Delete cached auth")
     logout_parser.set_defaults(func=cmd_logout)
+
+    # Find domain command
+    find_domain_parser = sub.add_parser("find-domain", help="Find currently working Z-Library domain")
+    find_domain_parser.add_argument("--timeout", type=int, default=10, help="Timeout per domain in seconds")
+    find_domain_parser.set_defaults(func=cmd_find_domain)
+
+    # Check access command
+    check_access_parser = sub.add_parser("check-access", help="Check if Z-Library domain is accessible")
+    check_access_parser.add_argument("--domain", help="Domain to check (default: current API base)")
+    check_access_parser.add_argument("--timeout", type=int, default=10, help="Connection timeout in seconds")
+    check_access_parser.set_defaults(func=cmd_check_access)
+
+    # Check env command
+    check_env_parser = sub.add_parser("check-env", help="Check if credentials are in environment variables")
+    check_env_parser.set_defaults(func=cmd_check_env)
 
     argv = sys.argv[1:]
     if not argv or argv[0].startswith("-"):
