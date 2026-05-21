@@ -1,0 +1,24 @@
+{
+  "name": "mason-skills",
+  "displayName": "Mason's Skills",
+  "description": "A collection of Claude Code skills for content creation, system safety analysis, macOS App Store readiness, WeChat article fetching, and Z-Library book management.",
+  "author": "Mason-1011",
+  "version": "1.0.0",
+  "repository": "https://github.com/Mason-1011/Mason_Skills",
+  "skills": [
+    "content-creation",
+    "macos-app-store-readiness",
+    "perrow-system-safety",
+    "wechat-article",
+    "z-library-books"
+  ],
+  "keywords": [
+    "content-creation",
+    "system-safety",
+    "app-store",
+    "wechat",
+    "z-library",
+    "macos",
+    "perrow"
+  ]
+}

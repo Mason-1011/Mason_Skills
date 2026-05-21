@@ -1,0 +1,25 @@
+{
+  "skill": "wechat-article",
+  "evals": [
+    {
+      "name": "search_account",
+      "prompt": "帮我搜索微信公众号「人民日报」",
+      "expected_output_contains": ["search", "fakeid"],
+      "assertions": [
+        "Response should run the search command with the account name",
+        "Response should present results with fakeid",
+        "Response should handle multiple results with AskUserQuestion"
+      ]
+    },
+    {
+      "name": "fetch_article",
+      "prompt": "帮我获取这篇微信公众号文章的内容：https://mp.weixin.qq.com/s/abc123",
+      "expected_output_contains": ["fetch", "content"],
+      "assertions": [
+        "Response should run the fetch command with the article URL",
+        "Response should extract article title, author, and content",
+        "Response should handle the HTML content output"
+      ]
+    }
+  ]
+}

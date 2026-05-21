@@ -1,0 +1,25 @@
+{
+  "skill": "perrow-system-safety",
+  "evals": [
+    {
+      "name": "classify_system",
+      "prompt": "Analyze a microservices architecture with shared message queues and tight deployment coupling using Perrow's framework",
+      "expected_output_contains": ["interactive complexity", "tight coupling", "Quadrant"],
+      "assertions": [
+        "Response should classify the system on the I/C chart",
+        "Response should assess both interactive complexity and tight coupling",
+        "Response should mention the Normal Accident Theory"
+      ]
+    },
+    {
+      "name": "incident_diagnosis",
+      "prompt": "We had a cascading failure in our payment system. A database failover caused cache invalidation which triggered a retry storm. Use DEPOSE to analyze this.",
+      "expected_output_contains": ["DEPOSE", "Design", "Equipment"],
+      "assertions": [
+        "Response should apply all six DEPOSE categories",
+        "Response should identify interacting failures vs independent ones",
+        "Response should not stop at operator error"
+      ]
+    }
+  ]
+}

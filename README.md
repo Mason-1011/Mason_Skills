@@ -1,38 +1,68 @@
 # Mason's Skills
 
-个人 [Claude Code Skills](https://code.claude.com/docs/en/skills) 合集，遵循 [Agent Skills](https://agentskills.io) 开放标准。
+A collection of [Claude Code Skills](https://code.claude.com/docs/en/skills) following the [Agent Skills](https://agentskills.io) open standard.
 
-安装方式：将 `.claude/skills/` 下的 skill 目录复制到目标机器的 `.claude/skills/` 即可。
+## Installation
+
+Install all skills at once:
+
+```bash
+npx skills add Mason-1011/Mason_Skills -g -y
+```
+
+Or install individual skills:
+
+```bash
+npx skills add Mason-1011/Mason_Skills@content-creation -g -y
+npx skills add Mason-1011/Mason_Skills@perrow-system-safety -g -y
+npx skills add Mason-1011/Mason_Skills@macos-app-store-readiness -g -y
+npx skills add Mason-1011/Mason_Skills@wechat-article -g -y
+npx skills add Mason-1011/Mason_Skills@z-library-books -g -y
+```
 
 ## Skills
 
-### content-creation
+| Skill | Description |
+|-------|-------------|
+| [content-creation](skills/content-creation/) | Content creation methodology — finding angles, designing rhythm, avoiding information aggregation |
+| [macos-app-store-readiness](skills/macos-app-store-readiness/) | macOS App Store submission audit with severity-scored HTML reports |
+| [perrow-system-safety](skills/perrow-system-safety/) | Charles Perrow's Normal Accident Theory for system safety analysis |
+| [wechat-article](skills/wechat-article/) | WeChat Official Account article search and full-text fetch |
+| [z-library-books](skills/z-library-books/) | Z-Library book search and download via browser automation |
 
-1. 第一步：获取信息（权重 30%） — 关键原则：跨领域获取，像管理投资组合一样管理信息源。
-2. 第二步：找角度（权重 60%） — 这是三步里最重要的一步。角度决定一篇内容的生死。
-3. 第三步：创作（权重 10%） — 创作权重最小，但决定生死。信息拿到了、角度找到了，讲不好故事就全白费。
+## Setup Notes
 
-**完整文档：** `.claude/skills/content-creation/SKILL.md`
+Some skills require additional setup:
 
 ### wechat-article
 
-1. 搜索公众号 — 按名称搜索公众号，返回 fakeid、名称、别名。fakeid 用于获取文章列表。
-2. 获取文章列表 — 分页获取公众号历史文章，每页约5篇。返回标题、链接、封面、摘要、时间戳。
-3. 获取文章全文 — 提取文章完整内容，返回标题、作者、描述、正文(HTML)、发布时间、公众号信息。无需 token，直接打开文章 URL。
-4. 手动登录 — 手动触发扫码登录，用于 token 失效时重新获取。
-5. 检查 Token — 检查当前 token 是否有效，过期时需重新登录。
+Requires Python dependencies and Playwright:
 
-**完整文档：** `.claude/skills/wechat-article/SKILL.md`
+```bash
+pip install requests PyYAML beautifulsoup4 lxml playwright
+python -m playwright install firefox
+```
+
+Login is handled automatically via QR code scan when needed.
 
 ### z-library-books
 
-1. Login
-2. Check auth status
-3. Search books — Options: --json (JSON output), --ids (show book IDs)
-4. Download a book
-5. Logout
-6. Find working domain — Scan known Z-Library mirror domains and find which ones are accessible:
-7. Check site access — Test if the current Z-Library domain is reachable:
-8. Check environment credentials — Verify that ZLIBRARY_EMAIL and ZLIBRARY_PASSWORD are set:
+Requires Python and Playwright:
 
-**完整文档：** `.claude/skills/z-library-books/SKILL.md`
+```bash
+pip install playwright
+python3 -m playwright install chromium
+```
+
+Set your Z-Library credentials as environment variables:
+
+```bash
+export ZLIBRARY_EMAIL="your-email@example.com"
+export ZLIBRARY_PASSWORD="your-password"
+```
+
+A network proxy may be required — set `HTTPS_PROXY` and `HTTP_PROXY`.
+
+## License
+
+MIT

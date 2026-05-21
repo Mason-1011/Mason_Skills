@@ -1,6 +1,10 @@
 ---
 name: z-library-books
-description: Authenticate to Z-Library and search/download books. Use when the user asks to search Z-Library, download books from Z-Library, find ebooks, or manage Z-Library authentication.
+description: "Authenticate to Z-Library and search/download books using browser automation. Use when the user wants to search Z-Library, download books from Z-Library, find ebooks, or manage Z-Library authentication."
+license: MIT
+metadata:
+  author: Mason-1011
+  compatibility: claude-code
 ---
 
 # Z-Library Books

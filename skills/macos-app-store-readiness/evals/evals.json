@@ -1,0 +1,25 @@
+{
+  "skill": "macos-app-store-readiness",
+  "evals": [
+    {
+      "name": "audit_project",
+      "prompt": "Check if my macOS app at ~/Projects/MyApp is ready for App Store submission",
+      "expected_output_contains": ["sandbox", "hardened runtime", "code signing"],
+      "assertions": [
+        "Response should mention checking Info.plist",
+        "Response should mention entitlements",
+        "Response should describe generating an HTML report"
+      ]
+    },
+    {
+      "name": "privacy_manifest_check",
+      "prompt": "My app was rejected because of PrivacyInfo.xcprivacy issues. Help me fix it.",
+      "expected_output_contains": ["PrivacyInfo.xcprivacy", "reason code"],
+      "assertions": [
+        "Response should explain privacy manifest requirements",
+        "Response should mention required API reason codes",
+        "Response should reference NSPrivacyAccessedAPITypes"
+      ]
+    }
+  ]
+}

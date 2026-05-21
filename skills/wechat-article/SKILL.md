@@ -1,7 +1,10 @@
 ---
 name: wechat-article
-description: Search WeChat Official Accounts, list their articles, and fetch full article content. Includes auto-login via QR code.
-trigger: User asks to search WeChat accounts, find WeChat articles, fetch WeChat article content, or work with WeChat Official Account (公众号) articles.
+description: "Search WeChat Official Accounts, list their articles, and fetch full article content with auto-login via QR code. Use when the user wants to search WeChat accounts, find WeChat articles, fetch WeChat article content, or work with WeChat Official Account (公众号) articles."
+license: MIT
+metadata:
+  author: Mason-1011
+  compatibility: claude-code
 ---
 
 # WeChat Article Fetcher

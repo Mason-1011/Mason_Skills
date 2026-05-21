@@ -1,0 +1,25 @@
+{
+  "skill": "z-library-books",
+  "evals": [
+    {
+      "name": "search_books",
+      "prompt": "Search for 'Clean Code' on Z-Library",
+      "expected_output_contains": ["search", "title", "author"],
+      "assertions": [
+        "Response should check auth status first",
+        "Response should run the search command",
+        "Response should summarize results with title, author, year, extension, size"
+      ]
+    },
+    {
+      "name": "check_auth",
+      "prompt": "Am I logged into Z-Library?",
+      "expected_output_contains": ["status", "auth"],
+      "assertions": [
+        "Response should run the status check command",
+        "Response should indicate whether authenticated or not",
+        "Response should offer to login if not authenticated"
+      ]
+    }
+  ]
+}

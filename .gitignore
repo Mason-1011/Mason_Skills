@@ -6,5 +6,6 @@ __pycache__/
 *.egg-info/
 dist/
 build/
-.claude/skills/wechat-article/data/wx.lic
-.claude/skills/wechat-article/data/wx_qrcode.png
+skills/wechat-article/data/wx.lic
+skills/wechat-article/data/wx_qrcode.png
+.claude/worktrees/

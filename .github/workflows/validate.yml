@@ -1,0 +1,29 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'skills/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'skills/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate skills
+        run: bash validate-skills.sh
+
+      - name: Check for credential leaks
+        run: |
+          echo "Checking for potential credential leaks..."
+          if grep -rn --include="*.md" --include="*.json" -E '(password|secret|token|api_key)\s*[:=]\s*["\x27][^"\x27]{8,}' skills/ .claude-plugin/ 2>/dev/null; then
+            echo "WARNING: Potential credentials found in tracked files"
+            exit 1
+          fi
+          echo "No credential leaks found"

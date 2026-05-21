@@ -1,7 +1,10 @@
 ---
 name: content-creation
-description: AI时代内容创作方法论。帮助用户写公众号/博客文章时找角度、设计节奏、避免信息搬运。
-trigger: 用户要写公众号文章、博客文章、内容策划、选题找角度、优化文章结构、或明确调用 /content-creation 时触发。
+description: "Content creation methodology for finding angles, designing rhythm, and avoiding information搬运. Use when the user wants to write blog posts, WeChat articles, content strategy, topic selection, article structure optimization, or invokes /content-creation."
+license: MIT
+metadata:
+  author: Mason-1011
+  compatibility: claude-code
 ---
 
 # 内容创作方法论

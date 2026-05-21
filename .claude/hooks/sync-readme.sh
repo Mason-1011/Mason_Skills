@@ -91,7 +91,7 @@ for skill_dir in "$SKILLS_DIR"/*/; do
     }
   fi
 
-  SKILLS_BODY="${SKILLS_BODY}"$'\n'"**完整文档：** \`.claude/skills/${skill_name}/SKILL.md\`"$'\n\n'
+  SKILLS_BODY="${SKILLS_BODY}"$'\n'"**完整文档：** \`skills/${skill_name}/SKILL.md\`"$'\n\n'
 done
 
 # Replace Skills section in README

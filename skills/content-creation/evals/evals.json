@@ -1,0 +1,25 @@
+{
+  "skill": "content-creation",
+  "evals": [
+    {
+      "name": "find_angle_for_article",
+      "prompt": "我想写一篇关于 AI 编程工具的文章，帮我找一个独特的角度",
+      "expected_output_contains": ["角度", "信息源"],
+      "assertions": [
+        "Response should guide the user through the angle-finding process",
+        "Response should mention cross-domain information gathering",
+        "Response should avoid simple information aggregation"
+      ]
+    },
+    {
+      "name": "article_structure",
+      "prompt": "帮我设计一篇公众号文章的结构，主题是远程工作的利与弊",
+      "expected_output_contains": ["节奏", "结构"],
+      "assertions": [
+        "Response should provide a clear article structure",
+        "Response should consider article rhythm and pacing",
+        "Response should include opening hook and closing"
+      ]
+    }
+  ]
+}
