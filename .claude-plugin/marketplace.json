@@ -1,24 +1,41 @@
 {
   "name": "mason-skills",
-  "displayName": "Mason's Skills",
-  "description": "A collection of Claude Code skills for content creation, system safety analysis, macOS App Store readiness, WeChat article fetching, and Z-Library book management.",
-  "author": "Mason-1011",
-  "version": "1.0.0",
-  "repository": "https://github.com/Mason-1011/Mason_Skills",
-  "skills": [
-    "content-creation",
-    "macos-app-store-readiness",
-    "perrow-system-safety",
-    "wechat-article",
-    "z-library-books"
-  ],
-  "keywords": [
-    "content-creation",
-    "system-safety",
-    "app-store",
-    "wechat",
-    "z-library",
-    "macos",
-    "perrow"
+  "owner": {
+    "name": "Mason-1011"
+  },
+  "metadata": {
+    "description": "A collection of Claude Code skills for content creation, system safety analysis, macOS App Store readiness, WeChat article fetching, and Z-Library book management.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "analysis-skills",
+      "description": "Skills for analyzing complex systems and architectures.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/perrow-system-safety",
+        "./skills/macos-app-store-readiness"
+      ]
+    },
+    {
+      "name": "content-skills",
+      "description": "Skills for content creation and publishing.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/content-creation",
+        "./skills/wechat-article"
+      ]
+    },
+    {
+      "name": "research-skills",
+      "description": "Skills for searching and downloading books.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/z-library-books"
+      ]
+    }
   ]
 }
