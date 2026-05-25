@@ -1,0 +1,28 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "groupings": [
+    {
+      "title": "Analysis",
+      "description": "Skills for analyzing complex systems and architectures.",
+      "skills": [
+        "perrow-system-safety",
+        "macos-app-store-readiness"
+      ]
+    },
+    {
+      "title": "Content",
+      "description": "Skills for content creation and publishing.",
+      "skills": [
+        "content-creation",
+        "wechat-article"
+      ]
+    },
+    {
+      "title": "Research",
+      "description": "Skills for searching and downloading books.",
+      "skills": [
+        "z-library-books"
+      ]
+    }
+  ]
+}
